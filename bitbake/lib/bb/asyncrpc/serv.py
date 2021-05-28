@@ -142,6 +142,9 @@ class AsyncServer(object):
         self.logger = logger
 
     def start_tcp_server(self, host, port):
+        if host == 'localhost':
+            host = '127.0.0.1'
+
         self.server = self.loop.run_until_complete(
             asyncio.start_server(self.handle_client, host, port, loop=self.loop)
         )
